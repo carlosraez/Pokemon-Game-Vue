@@ -1,20 +1,30 @@
 <template>
   <div class="pokemon-container">
-    <img
-      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg"
-      alt="Pokemon"
-      class="hidden-pokemon"
-    />
-    <!-- <img
-      src="https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/1.svg"
-      alt="Pokemon"
-      class="fade-in"
-    /> -->
+    <img :src="imgUrl" alt="Pokemon" class="hidden-pokemon" />
+    <img v-if="showPokemon" :src="imgUrl" alt="Pokemon" class="fade-in" />
   </div>
 </template>
 
 <script>
-export default {};
+export default {
+  props: {
+    pokemonID: {
+      type: Number,
+      required: true,
+      default: 1,
+    },
+    showPokemon: {
+      type: Boolean,
+      required: true,
+      default: false,
+    },
+  },
+  computed: {
+    imgUrl() {
+      return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/dream-world/${this.pokemonID}.svg`;
+    },
+  },
+};
 </script>
 
 <style scoped>
@@ -23,7 +33,7 @@ export default {};
 }
 img {
   height: 200px;
-  /* position: absolute; */
+  position: absolute;
   right: 32%;
   user-select: none;
   -moz-user-select: none;
